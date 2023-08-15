@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Password Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Generate a <br><span>Random Password</span></h1>
+    <div class="display">
+        <input type="text" id="password" placeholder="Password">
+        <img src="images/copy.png" onclick="copyPassword()">
+    </div>
+    <button onclick="createPassword()"><img src="images/generate.png">Generate Password</button>
+</div> 
+<script>
+    const passwordBox=document.getElementById("password");
+    const len = 10;
+    const upCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const lowCase="abcdefghijklmnopqrstuvwxyz";
+    const numb = "0123456789";
+    const symb = "@#$%^&*()_+~|}{[]></-="
+
+    const allChar = upCase + lowCase + numb + symb;
+
+function createPassword(){
+    let password= "";
+    password +=upCase[Math.floor(Math.random() * upCase.length)];
+    password += lowCase[Math.floor(Math.random() * lowCase.length)];
+    password +=numb[Math.floor(Math.random() * numb.length)];
+    password +=symb[Math.floor(Math.random() * symb.length)];
+
+    while(len > password.length){
+        password += symb[Math.floor(Math.random() * symb.length)];
+    }
+    passwordBox.value = password;
+}
+
+function copyPassword(){
+    passwordBox.select();
+    document.execCommand("copy");
+}
+
+</script>
+</body>
+</html>
